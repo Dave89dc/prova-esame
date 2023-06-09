@@ -1,0 +1,40 @@
+
+
+  <mat-form-field class="example-full-width">
+    <mat-label>which brewery do you want?</mat-label>
+    <input #myInput (keydown.enter)="filterByName(myInput.value)" matInput placeholder="Ex. Pizza" value="" id="brewery-name">
+  </mat-form-field>
+
+  <button (click)="getAllBreweries()">all breweries</button>
+
+  <mat-form-field>
+    <mat-label>Favorite food</mat-label>
+    <mat-select  *ngIf="breweries" >
+      <mat-option *ngFor="let brewery of breweries" [value]="brewery.state">
+        {{brewery.state}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+
+<div *ngIf="breweries" class="card-container">
+
+  <mat-card color="primary" class="example-card" *ngFor="let brewery of breweries">
+    <mat-card-header>
+      <mat-card-title><span>{{brewery.name}}</span></mat-card-title>
+      <mat-card-subtitle><span>{{brewery.brewery_type}}</span></mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <p>Address: {{brewery.address_1}}</p>
+      <p>City: {{brewery.city}}</p>
+      <p>Country: {{brewery.country}}</p>
+      <a href="tel:+{{brewery.phone}}">Tel. {{brewery.phone}}</a>
+      <br>
+      <a target="_blank" href="{{brewery.website_url}}">{{brewery.name}} website</a>
+    </mat-card-content>
+  </mat-card>
+
+</div>
+
+
